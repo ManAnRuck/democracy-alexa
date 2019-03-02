@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist",
+    "sourceMap": false,
+    "target": "es2015",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["lambda/**/*.ts", "lambda/**/*.json", "test/**/*.ts"],
+  "exclude": ["node_modules"]
+}

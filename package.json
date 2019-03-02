@@ -1,0 +1,24 @@
+{
+  "name": "skill-sample-nodejs-typescript-hello-world",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": " ",
+  "author": "Manuel Ruck <github@manuelruck.de>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
+    "lint": "tslint -p tsconfig.json",
+    "deploy": "ask deploy",
+    "deploy:lambda": "ask deploy --target lambda"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4",
+    "rimraf": "^2.6.3",
+    "tslint": "^5.13.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-immutable": "^5.3.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.3.3333"
+  }
+}
