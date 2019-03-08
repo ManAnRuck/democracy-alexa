@@ -15,18 +15,14 @@ const DeputiesIntentHandler: RequestHandler = {
   },
   handle: async (handlerInput: HandlerInput) => {
     try {
-      // Call the progressive response service
       await callDirectiveService(handlerInput);
     } catch (err) {
-      // if it failed we can continue, just the user will wait longer for first response
       console.log("error : " + err);
     }
 
     const deputiesResponse = await client.query({
       query: allDeputies
     });
-
-    await new Promise(resolve => setTimeout(resolve, 5000));
 
     // const deputiesResponse = allMembers;
 
