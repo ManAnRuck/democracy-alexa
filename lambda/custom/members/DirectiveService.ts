@@ -5,6 +5,10 @@ import SendDirectiveRequest = services.directive.SendDirectiveRequest;
 const callDirectiveService = (handlerInput: HandlerInput): Promise<void> => {
   // Call Alexa Directive Service.
   const requestEnvelope = handlerInput.requestEnvelope;
+  console.log(
+    "handlerInput.serviceClientFactory",
+    handlerInput.serviceClientFactory
+  );
   const directiveServiceClient = handlerInput.serviceClientFactory.getDirectiveServiceClient();
 
   const requestId = requestEnvelope.request.requestId;
@@ -18,8 +22,7 @@ const callDirectiveService = (handlerInput: HandlerInput): Promise<void> => {
     },
     directive: {
       type: "VoicePlayer.Speak",
-      speech:
-        "Space is a bit far way. Wait till I get back the information from ISS."
+      speech: "Einen kurzen augenblick bitte ich suche dir 3 der 709 heraus."
     }
   };
   // send directive

@@ -3,6 +3,7 @@ import client from "../lib/initApollo";
 import allMembers from "./allMembers";
 import shuffle from "shuffle-array";
 import allDeputies from "./query/allDeputies";
+import callDirectiveService from "./DirectiveService";
 
 const DeputiesIntentHandler: RequestHandler = {
   canHandle(handlerInput: HandlerInput) {
@@ -13,20 +14,30 @@ const DeputiesIntentHandler: RequestHandler = {
     );
   },
   handle: async (handlerInput: HandlerInput) => {
+    try {
+      // Call the progressive response service
+      await callDirectiveService(handlerInput);
+    } catch (err) {
+      // if it failed we can continue, just the user will wait longer for first response
+      console.log("error : " + err);
+    }
+
     const deputiesResponse = await client.query({
       query: allDeputies
     });
+
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     // const deputiesResponse = allMembers;
 
     console.log("deputies", deputiesResponse.data.deputies);
 
-    const deputies = deputiesResponse.data.deputies
-      .map(({ name, party }: { name: string; party: string }) => ({
+    const deputies = deputiesResponse.data.deputies.map(
+      ({ name, party }: { name: string; party: string }) => ({
         name,
         party
-      }))
-      .slice(-3);
+      })
+    );
 
     shuffle(deputies);
 
@@ -35,7 +46,7 @@ const DeputiesIntentHandler: RequestHandler = {
         prev: { content: string; sum: number; last: boolean },
         { name, party }: { name: string; party: string }
       ) => {
-        if (prev.content.length < 7500) {
+        if (prev.sum < 2) {
           return {
             ...prev,
             content: `${prev.content}, ${name} für die Fraktion ${party}`,
@@ -44,7 +55,7 @@ const DeputiesIntentHandler: RequestHandler = {
         } else if (!prev.last) {
           return {
             ...prev,
-            content: `${prev.content}, ${name} von der ${party}`,
+            content: `${prev.content} und ${name} für die Fraktion ${party}`,
             sum: prev.sum + 1,
             last: true
           };

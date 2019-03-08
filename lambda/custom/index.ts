@@ -2,7 +2,8 @@ import Alexa, {
   HandlerInput,
   ErrorHandler,
   RequestHandler,
-  SkillBuilders
+  SkillBuilders,
+  DefaultApiClient
 } from "ask-sdk-core";
 import { SessionEndedRequest, Response } from "ask-sdk-model";
 import DeputiesIntentHandler from "./members/DeputiesIntentHandler";
@@ -121,6 +122,7 @@ const handler = skillBuilder
     SessionEndedRequestHandler
   )
   .addErrorHandlers(ErrorHandler)
+  .withApiClient(new DefaultApiClient())
   .lambda();
 
 export { handler };
