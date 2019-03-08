@@ -4,6 +4,7 @@ import Alexa, {
   RequestHandler
 } from "ask-sdk-core";
 import { SessionEndedRequest, Response } from "ask-sdk-model";
+import client from "./lib/initApollo";
 
 const LaunchRequestHandler: RequestHandler = {
   canHandle(handlerInput: HandlerInput): boolean {
