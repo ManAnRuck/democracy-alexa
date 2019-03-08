@@ -12,9 +12,14 @@
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.5.1",
     "apollo-link-http": "^1.5.11",
-    "ask-sdk-core": "^2.0.0",
+    "ask-sdk-core": "^2.5.1",
     "ask-sdk-model": "^1.0.0",
-    "graphql-tag": "^2.10.1"
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
+    "isomorphic-fetch": "^2.2.1",
+    "shuffle-array": "^1.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/shuffle-array": "^0.0.28"
+  }
 }

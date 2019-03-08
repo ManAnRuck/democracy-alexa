@@ -8,9 +8,10 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
+    "postbuild": "cp -R lambda/custom/node_modules dist/node_modules",
     "lint": "tslint -p tsconfig.json",
-    "deploy": "ask deploy",
-    "deploy:lambda": "ask deploy --target lambda"
+    "deploy": "npm run build && ask deploy",
+    "deploy:lambda": "npm run build && ask deploy --target lambda"
   },
   "devDependencies": {
     "prettier": "^1.16.4",

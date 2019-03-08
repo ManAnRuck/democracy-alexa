@@ -1,17 +1,19 @@
 import Alexa, {
   HandlerInput,
   ErrorHandler,
-  RequestHandler
+  RequestHandler,
+  SkillBuilders
 } from "ask-sdk-core";
 import { SessionEndedRequest, Response } from "ask-sdk-model";
-import client from "./lib/initApollo";
+import DeputiesIntentHandler from "./members/DeputiesIntentHandler";
 
 const LaunchRequestHandler: RequestHandler = {
   canHandle(handlerInput: HandlerInput): boolean {
+    console.log("DEBUG", handlerInput.requestEnvelope.request.type);
     return handlerInput.requestEnvelope.request.type === "LaunchRequest";
   },
   handle(handlerInput: HandlerInput): Response {
-    const speechText = "Welcome to the Alexa Skills Kit, you can say hello!";
+    const speechText = "Willkommen in der Demokratie";
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -25,11 +27,13 @@ const HelloWorldIntentHandler: RequestHandler = {
   canHandle(handlerInput: HandlerInput) {
     return (
       handlerInput.requestEnvelope.request.type === "IntentRequest" &&
-      handlerInput.requestEnvelope.request.intent.name === "HelloWorldIntent"
+      (handlerInput.requestEnvelope.request.intent.name ===
+        "HelloWorldIntent" ||
+        handlerInput.requestEnvelope.request.intent.name === "hallo")
     );
   },
   handle(handlerInput: HandlerInput): Response {
-    const speechText = "Hello World!";
+    const speechText = "Hallo Bürger!";
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -105,11 +109,12 @@ const ErrorHandler: ErrorHandler = {
   }
 };
 
-const skillBuilder = Alexa.SkillBuilders.custom();
+const skillBuilder = SkillBuilders.custom();
 
 const handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
+    DeputiesIntentHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,

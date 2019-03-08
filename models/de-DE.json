@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "demokratie",
+      "invocationName": "democracy",
       "intents": [
         {
           "name": "AMAZON.FallbackIntent",
@@ -23,6 +23,15 @@
           "name": "hallo",
           "slots": [],
           "samples": ["hi", "guten tag", "hallo"]
+        },
+        {
+          "name": "Bundestagsabgeordnete",
+          "slots": [],
+          "samples": [
+            "wer arbeitet im Bundestag",
+            "Mitglieder des Bundestages",
+            "wer im Bundestag arbeitet"
+          ]
         }
       ],
       "types": []
