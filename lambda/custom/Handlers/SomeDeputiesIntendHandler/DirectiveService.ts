@@ -12,8 +12,6 @@ const callDirectiveService = (handlerInput: HandlerInput): Promise<void> => {
   const directiveServiceClient = handlerInput.serviceClientFactory.getDirectiveServiceClient();
 
   const requestId = requestEnvelope.request.requestId;
-  const endpoint = requestEnvelope.context.System.apiEndpoint;
-  const token = requestEnvelope.context.System.apiAccessToken;
 
   // build the progressive response directive
   const directive: SendDirectiveRequest = {

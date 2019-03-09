@@ -1,9 +1,9 @@
 import { RequestHandler, HandlerInput } from "ask-sdk-core";
-import client from "../lib/initApollo";
-import allMembers from "./allMembers";
 import shuffle from "shuffle-array";
 import allDeputies from "./query/allDeputies";
 import callDirectiveService from "./DirectiveService";
+import client from "../../lib/initApollo";
+// import allMembers from "./allMembers";
 
 const DeputiesIntentHandler: RequestHandler = {
   canHandle(handlerInput: HandlerInput) {
